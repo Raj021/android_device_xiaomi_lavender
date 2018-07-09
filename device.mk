@@ -331,9 +331,12 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-service
 
 # Lights
+#PRODUCT_PACKAGES += \
+#    android.hardware.light@2.0-impl \
+#    android.hardware.light@2.0-service
+# Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service
+    android.hardware.light@2.0-service.xiaomi_sdm845
 
 # Media
 PRODUCT_COPY_FILES += \
