@@ -35,6 +35,11 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
+  # create symlink for vendor mount points
+    symlink /vendor/firmware_mnt /firmware
+    symlink /vendor/bt_firmware /bt_firmware
+    symlink /vendor/dsp /dsp
+
   # Change ownership of hw_recovery related nodes
     chown system graphics /sys/kernel/debug/dri/0/debug/dump
     chown system graphics /sys/kernel/debug/dri/0/debug/recovery_reg
@@ -56,6 +61,11 @@ on init
 
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
+    chown 0660 /sys/class/leds/red/brightness
+    chown 0660 /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/red/duty_pcts
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -135,6 +145,35 @@ on boot
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
+    #define back flash and front flash
+    chmod 0660 /sys/android_camera/sensor
+    chmod 0660 /sys/class/leds/led:flash_0/brightness
+    chmod 0660 /sys/class/leds/led:flash_1/brightness
+    chmod 0660 /sys/class/leds/led:flash_2/brightness
+    chmod 0660 /sys/class/leds/led:torch_0/brightness
+    chmod 0660 /sys/class/leds/led:torch_1/brightness
+    chmod 0660 /sys/class/leds/led:torch_2/brightness
+    chmod 0660 /sys/class/leds/led:switch_0/brightness
+    chmod 0660 /sys/class/leds/led:switch_1/brightness
+    chmod 0660 /sys/class/leds/flashlight/brightness
+    chown system system /sys/android_camera/sensor
+    chown system system /sys/class/leds/led:flash_0/brightness
+    chown system system /sys/class/leds/led:flash_1/brightness
+    chown system system /sys/class/leds/led:flash_2/brightness
+    chown system system /sys/class/leds/led:torch_0/brightness
+    chown system system /sys/class/leds/led:torch_1/brightness
+    chown system system /sys/class/leds/led:torch_2/brightness
+    chown system system /sys/class/leds/led:switch_0/brightness
+    chown system system /sys/class/leds/led:switch_1/brightness
+    chown system system /sys/class/leds/flashlight/brightness
+    chmod 0660 /sys/class/power_supply/battery/input_suspend
+    chmod 0660 /sys/class/power_supply/battery/charging_enabled
+    chown system system /sys/class/power_supply/battery/input_suspend
+    chown system system /sys/class/power_supply/battery/charging_enabled
+
+    chmod 0770 /sys/class/power_supply/battery/device/thermalcall
+    chown system system /sys/class/power_supply/battery/device/thermalcall
+
     mkdir /persist/drm 0770 system system
     mkdir /mnt/vendor/persist/bluetooth 0770 bluetooth bluetooth
     mkdir /persist/misc 0770 system system
@@ -154,6 +193,8 @@ on boot
 
     setprop ro.telephony.call_ring.multiple false
 
+    #enable camera read sensors data
+    setprop persist.camera.gyro.disable 0
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
@@ -233,6 +274,9 @@ on boot
 
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
+
+    # Create pa-cal driver directory lct-20180914
+    mkdir /mnt/vendor/persist/audio 0770 root root
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -1250,3 +1294,26 @@ service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
     oneshot
     interface android.hardware.audio@4.0::IDevicesFactory default
     interface android.hardware.audio@2.0::IDevicesFactory default
+
+#workaround for camera HAL can not read sys property
+on property:sys.camera.face.unlock=*
+    setprop vendor.camera.face.unlock ${sys.camera.face.unlock}
+
+#add MIUI camera flag
+on property:sys.camera.miui.apk=*
+    setprop vendor.camera.miui.apk ${sys.camera.miui.apk}
+#add cts camera flag
+#add MIUI camera flag
+on property:sys.camera.not.cts.apk=*
+    setprop vendor.camera.not.cts.apk ${sys.camera.not.cts.apk}
+
+#add MIUI camera flag
+on property:sys.camera.douyin.apk=*
+    setprop vendor.camera.douyin.apk ${sys.camera.douyin.apk}
+
+#add cts verify flag
+on property:sys.camera.not.ctsverify.apk=*
+    setprop vendor.camera.not.ctsverify.apk ${sys.camera.not.ctsverify.apk}
+#add cts verify flag
+    on property:sys.gyro.sensorname=*
+    setprop vendor.camera.gyro.sensorname ${sys.gyro.sensorname}
