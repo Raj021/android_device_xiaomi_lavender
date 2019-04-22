@@ -70,4 +70,4 @@ PRODUCT_BOOT_JARS += \
 
 # VNDK
 PRODUCT_PACKAGES += \
-    vndk_package
+    vndk-sp
