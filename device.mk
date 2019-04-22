@@ -184,6 +184,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.xiaomi_sdm660
 
+# Net
+PRODUCT_PACKAGES += \
+    netutils-wrapper-1.0
+
 # RCS
 PRODUCT_PACKAGES += \
     rcs_service_aidl \
