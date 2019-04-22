@@ -90,7 +90,7 @@ Light::Light() {
 }
 
 void Light::handleBacklight(const LightState& state) {
-    int maxBrightness = get("/sys/class/backlight/panel0-backlight/max_brightness", -1);
+    int maxBrightness = get("/sys/class/leds/lcd-backlight/max_brightness", -1);
     if (maxBrightness < 0) {
         maxBrightness = kDefaultMaxBrightness;
     }
@@ -98,7 +98,7 @@ void Light::handleBacklight(const LightState& state) {
     uint32_t brightness = sentBrightness * maxBrightness / kDefaultMaxBrightness;
     LOG(DEBUG) << "Writing backlight brightness " << brightness
                << " (orig " << sentBrightness << ")";
-    set("/sys/class/backlight/panel0-backlight/brightness", brightness);
+    set("/sys/class/leds/lcd-backlight/max_brightness", brightness);
 }
 
 void Light::handleNotification(const LightState& state, size_t index) {
@@ -129,7 +129,7 @@ void Light::handleNotification(const LightState& state, size_t index) {
     };
 
     // Disable blinking to start
-    set("/sys/class/leds/white/blink", 0);
+    set("/sys/class/leds/red/blink", 0);
 
     if (onMs > 0 && offMs > 0) {
         uint32_t pauseLo, pauseHi, stepDuration;
@@ -142,16 +142,16 @@ void Light::handleNotification(const LightState& state, size_t index) {
             pauseLo = offMs - kRampSteps * stepDuration;
         }
 
-        set("/sys/class/leds/white/start_idx", 0);
-        set("/sys/class/leds/white/duty_pcts", getScaledDutyPercent(whiteBrightness));
-        set("/sys/class/leds/white/pause_lo", pauseLo);
-        set("/sys/class/leds/white/pause_hi", pauseHi);
-        set("/sys/class/leds/white/ramp_step_ms", stepDuration);
+        set("/sys/class/leds/red/start_idx", 0);
+        set("/sys/class/leds/red/duty_pcts", getScaledDutyPercent(whiteBrightness));
+        set("/sys/class/leds/red/pause_lo", pauseLo);
+        set("/sys/class/leds/red/pause_hi", pauseHi);
+        set("/sys/class/leds/red/ramp_step_ms", stepDuration);
 
         // Start blinking
-        set("/sys/class/leds/white/blink", 1);
+        set("/sys/class/leds/red/blink", 1);
     } else {
-        set("/sys/class/leds/white/brightness", whiteBrightness);
+        set("/sys/class/leds/red/brightness", whiteBrightness);
     }
 }
 
