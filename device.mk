@@ -213,12 +213,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
+# Sensors
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.sensors.facing=false \
+    ro.vendor.sensors.cmc=false \
+    ro.vendor.sdk.sensors.gestures=false
+
 # Telephony
 PRODUCT_PACKAGES += \
     telephony-ext
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.radio.force_on_dc=true \
+    persist.vendor.qti.telephony.vt_cam_interface=1
 
 # TextClassifier smart selection model files
 PRODUCT_PACKAGES += \
