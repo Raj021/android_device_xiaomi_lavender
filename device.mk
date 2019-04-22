@@ -59,6 +59,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.autosuspend.timeout=500000
 
 # Audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    libaudio-resampler \
+    tinymix
+
+PRODUCT_PACKAGES += \
+    android.hardware.audio@4.0 \
+    android.hardware.audio.common@4.0 \
+    android.hardware.audio.common@4.0-util \
+    android.hardware.audio.effect@4.0
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio/audio_policy.conf
 
