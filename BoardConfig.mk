@@ -110,7 +110,7 @@ SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 TARGET_ENABLE_MEDIADRM_64 := true
 
 # Extended Filesystem Support
-TARGET_EXFAT_DRIVER := sdfat
+#TARGET_EXFAT_DRIVER := sdfat
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
@@ -125,7 +125,7 @@ TARGET_PROVIDES_KEYMASTER := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Mainfest
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+#DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/framework_compatibility_matrix.xml
@@ -155,10 +155,9 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 TARGET_USES_INTERACTION_BOOST := true
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wake_gesture"
+#TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wake_gesture"
 
 # Recovery
-
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/recovery.fstab
 
 # RIL
@@ -183,7 +182,7 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2019-03-05
+#VENDOR_SECURITY_PATCH := 2019-03-05
 
 # inherit from the proprietary version
 -include vendor/xiaomi/lavender/BoardConfigVendor.mk

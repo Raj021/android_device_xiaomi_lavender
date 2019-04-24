@@ -64,11 +64,11 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
-PRODUCT_PACKAGES += \
-    android.hardware.audio@4.0 \
-    android.hardware.audio.common@4.0 \
-    android.hardware.audio.common@4.0-util \
-    android.hardware.audio.effect@4.0
+#PRODUCT_PACKAGES += \
+#    android.hardware.audio@4.0 \
+#    android.hardware.audio.common@4.0 \
+#    android.hardware.audio.common@4.0-util \
+#    android.hardware.audio.effect@4.0
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio/audio_policy.conf
@@ -209,9 +209,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
 
 # Seccomp policy
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+#    $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -239,5 +239,5 @@ PRODUCT_PACKAGES += \
     lineage.trust@1.0-service
 
 # VNDK
-PRODUCT_PACKAGES += \
-    vndk-sp
+#PRODUCT_PACKAGES += \
+#    vndk-sp
